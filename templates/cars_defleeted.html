@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Defleeted Cars{% endblock %}
+{% block content %}
+<h1>Defleeted Cars</h1>
+<a href="{{ url_for('list_cars') }}" class="btn btn-secondary mb-3">Back to Active Cars</a>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th>Licence Plate</th>
+      <th>Model</th>
+      <th>Year</th>
+      <th>Colour</th>
+      <th>Defleeted On</th>
+      <th>Planned Rent</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for car in cars %}
+    <tr>
+      <td>{{ car.licence_plate }}</td>
+      <td>{{ car.model }}</td>
+      <td>{{ car.model_year }}</td>
+      <td>{{ car.colour }}</td>
+      <td>{{ car.defleet_record.date.strftime('%d/%m/%Y') }}</td>
+      <td>{{ car.planned_rent }}</td>
+    </tr>
+    {% endfor %}
+    {% if cars|length == 0 %}
+    <tr><td colspan="6"><em>No defleeted cars.</em></td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

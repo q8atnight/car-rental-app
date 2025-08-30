@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Damages{% endblock %}
+{% block content %}
+<h1>Damages</h1>
+<p><strong>Car:</strong> {{ rental.car.licence_plate }} – {{ rental.car.model }}<br>
+<strong>Customer:</strong> {{ rental.customer.name }}</p>
+<table class="table table-dark table-striped">
+  <thead><tr><th>Date</th><th>Description</th><th>Amount (AED)</th><th>Paid</th><th>Settled Via</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for d in damages %}
+    <tr>
+      <td>{{ d.date.strftime('%d/%m/%Y') }}</td>
+      <td>{{ d.description }}</td>
+      <td>{{ d.amount }}</td>
+      <td>{{ 'Yes' if d.paid else 'No' }}</td>
+      <td>{{ d.settled_via }}</td>
+      <td>
+        <a href="{{ url_for('edit_damage', damage_id=d.id) }}" class="btn btn-sm btn-primary">Edit</a>
+        <form action="{{ url_for('delete_damage', damage_id=d.id) }}" method="post" style="display:inline" onsubmit="return confirm('Delete this damage?');">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{{ url_for('add_damage', car_id=rental.car.id, customer_id=rental.customer.id) }}" class="btn btn-secondary">Add Damage</a>
+<a href="{{ url_for('list_rentals') }}" class="btn btn-secondary">Back to Rentals</a>
+{% endblock %}

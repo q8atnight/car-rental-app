@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Expenses Overview{% endblock %}
+{% block content %}
+<h1>Expenses Overview</h1>
+<table class="table table-dark table-striped">
+  <thead><tr><th>Car</th><th>Total Expenses (AED)</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td>{{ row.car.licence_plate }} – {{ row.car.model }}</td>
+      <td>{{ row.total|round(2) }}</td>
+      <td><a href="{{ url_for('expenses_by_car', car_id=row.car.id) }}" class="btn btn-sm btn-info">View Details</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

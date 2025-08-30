@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Add Car{% endblock %}
+{% block content %}
+<h1>Add Car</h1>
+<form method="post">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input type="text" class="form-control" name="model" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Model year</label>
+        <input type="number" class="form-control" name="model_year">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Licence plate</label>
+        <input type="text" class="form-control" name="licence_plate">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Colour</label>
+        <input type="text" class="form-control" name="colour">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Mileage at purchase</label>
+        <input type="number" class="form-control" name="mileage_at_purchase">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Purchase price</label>
+        <input type="number" step="0.01" class="form-control" name="purchase_price">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Initially invested</label>
+        <input type="number" step="0.01" class="form-control" name="initial_investment">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Salik tag</label>
+        <input type="text" class="form-control" name="salik_tag">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="form-label">Registration date (DD/MM/YYYY)</label>
+        <input type="text" class="form-control datepicker" name="registration_date" placeholder="dd/mm/yyyy">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Tracker installed?</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="tracker_installed" id="tracker_installed">
+          <label class="form-check-label" for="tracker_installed">Yes</label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Passing cost</label>
+        <input type="number" step="0.01" class="form-control" name="passing_cost">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Registration cost</label>
+        <input type="number" step="0.01" class="form-control" name="registration_cost">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Insurance cost</label>
+        <input type="number" step="0.01" class="form-control" name="insurance_cost">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Planned rent price</label>
+        <input type="number" step="0.01" class="form-control" name="planned_rent">
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

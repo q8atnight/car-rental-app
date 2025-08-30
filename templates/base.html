@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Car Rental Management{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Flatpickr date picker for calendar inputs -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Car Rental</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('list_cars') }}">Cars</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('list_customers') }}">Customers</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('list_rentals') }}">Rentals</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('list_settled_rentals') }}">Settled Rentals</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('list_defleeted_cars') }}">Defleeted Cars</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('list_bookings') }}">Bookings</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('availability') }}">Availability</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('expenses_overview') }}">Expenses</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('reports') }}">Reports</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-warning">
+            {% for message in messages %}
+              <div>{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Flatpickr date picker library -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      // Initialise flatpickr on inputs with the class 'datepicker'.  Use
+      // European day/month/year format and a dark theme that matches the site.
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.flatpickr) {
+          flatpickr('.datepicker', {
+            dateFormat: 'd/m/Y',
+            allowInput: true
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

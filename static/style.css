@@ -1,0 +1,126 @@
+/* Dark mode styles inspired by ChatGPT's dark theme */
+body {
+  background-color: #1e1e1e;
+  color: #e5e5e5;
+}
+
+a {
+  color: #6ab7ff;
+}
+
+a:hover {
+  color: #a3d2ff;
+}
+
+.navbar {
+  background-color: #2b2b2b !important;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+  color: #e5e5e5 !important;
+}
+
+.navbar-brand:hover, .navbar-nav .nav-link:hover {
+  color: #ffffff !important;
+}
+
+.card {
+  background-color: #2b2b2b;
+  border: none;
+  color: #e5e5e5;
+}
+
+.card-header {
+  background-color: #3a3a3a;
+  border-bottom: none;
+  color: #ffffff;
+}
+
+.table {
+  color: #e5e5e5;
+}
+
+.table th {
+  background-color: #323232;
+  color: #ffffff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #2a2a2a;
+}
+
+.btn-primary {
+  background-color: #4e8ee8;
+  border-color: #4e8ee8;
+}
+
+.btn-primary:hover {
+  background-color: #6ba5f5;
+  border-color: #6ba5f5;
+}
+
+.btn-secondary {
+  background-color: #5c5c5c;
+  border-color: #5c5c5c;
+}
+
+.btn-secondary:hover {
+  background-color: #767676;
+  border-color: #767676;
+}
+
+.form-control, .form-select, textarea {
+  background-color: #2b2b2b;
+  border: 1px solid #444;
+  color: #e5e5e5;
+}
+
+.form-control:focus, .form-select:focus, textarea:focus {
+  background-color: #2b2b2b;
+  color: #e5e5e5;
+  border-color: #6ba5f5;
+  box-shadow: none;
+}
+
+/* Adjust colours for other button variants in dark mode */
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: #ffffff;
+}
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #138496;
+}
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #ffffff;
+}
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+.btn-warning {
+  background-color: #fd7e14;
+  border-color: #fd7e14;
+  color: #212529;
+}
+.btn-warning:hover {
+  background-color: #e96b0c;
+  border-color: #e96b0c;
+}
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #ffffff;
+}
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #218838;
+}
+
+/* Muted text colour for dark backgrounds */
+.text-muted {
+  color: #b0b0b0 !important;
+}

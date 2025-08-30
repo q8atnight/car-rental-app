@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+
+<!-- Summary cards -->
+<div class="row mb-3">
+  <div class="col-md-3">
+    <div class="card bg-dark border-secondary h-100">
+      <div class="card-body">
+        <div class="h6 text-light">Total Cars</div>
+        <div class="display-6">{{ total_cars }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card bg-dark border-secondary h-100">
+      <div class="card-body">
+        <div class="h6 text-light">Rented Today</div>
+        <div class="display-6">{{ rented }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card bg-dark border-secondary h-100">
+      <div class="card-body">
+        <div class="h6 text-light">Booked Today</div>
+        <div class="display-6">{{ booked }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card bg-dark border-secondary h-100">
+      <div class="card-body">
+        <div class="h6 text-light">Available</div>
+        <div class="display-6">{{ available }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 mb-3">
+    <div class="card bg-dark border-secondary">
+      <div class="card-header">Upcoming Renewals (next 30 days)</div>
+      <div class="card-body">
+        {% if upcoming_renewals %}
+          <ul class="list-group list-group-flush">
+            {% for r in upcoming_renewals %}
+              <li class="list-group-item bg-dark text-light d-flex justify-content-between">
+                <span>{{ r.car.licence_plate }} – {{ r.car.model }} ({{ r.type }})</span>
+                <span>{{ r.date.strftime('%d/%m/%Y') }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <em>No renewals in the next 30 days.</em>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 mb-3">
+    <div class="card bg-dark border-secondary">
+      <div class="card-header">Overdue Rentals</div>
+      <div class="card-body">
+        {% if overdue_rentals %}
+          <ul class="list-group list-group-flush">
+            {% for r in overdue_rentals %}
+              <li class="list-group-item bg-dark text-light">
+                {{ r.car.licence_plate }} – {{ r.customer.name }} (since {{ r.start_date.strftime('%d/%m/%Y') }})
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <em>No overdue rentals.</em>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-4">
+    <div class="card bg-dark border-secondary h-100">
+      <div class="card-body">
+        <div class="h6 text-light">Unpaid Fines (total)</div>
+        <div class="display-6">{{ totals.unpaid_fines|round(2) }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card bg-dark border-secondary h-100">
+      <div class="card-body">
+        <div class="h6 text-light">Unpaid Damages (total)</div>
+        <div class="display-6">{{ totals.unpaid_damages|round(2) }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card bg-dark border-secondary h-100">
+      <div class="card-body">
+        <div class="h6 text-light">Unpaid Salik (this month)</div>
+        <div class="display-6">{{ totals.salik_unpaid_month|round(2) }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Settled Rentals{% endblock %}
+{% block content %}
+<h1>Settled Rentals</h1>
+<a href="{{ url_for('list_rentals') }}" class="btn btn-secondary mb-3">Back to Active Rentals</a>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th>Car</th>
+      <th>Customer</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Actual Rent</th>
+      <th>Deposit</th>
+      <th>Refund</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rental in rentals %}
+    <tr>
+      <td>{{ rental.car.licence_plate }}</td>
+      <td>{{ rental.customer.name }}</td>
+      <td>{{ rental.start_date.strftime('%d/%m/%Y') }}</td>
+      <td>{{ rental.end_date.strftime('%d/%m/%Y') if rental.end_date else 'Open' }}</td>
+      <td>{{ rental.actual_rent or '-' }}</td>
+      <td>{{ rental.deposit or '-' }}</td>
+      <td>
+        {% if rental.deposit_refunded %}
+          {{ rental.deposit_refunded_amount }} on {{ rental.deposit_refund_date.strftime('%d/%m/%Y') }}
+        {% else %}
+          –
+        {% endif %}
+      </td>
+      <td>
+        <a href="{{ url_for('list_payments_for_rental', rental_id=rental.id) }}" class="btn btn-sm btn-outline-secondary">Payments</a>
+        <a href="{{ url_for('list_fines_for_rental', rental_id=rental.id) }}" class="btn btn-sm btn-outline-warning">Fines</a>
+        <a href="{{ url_for('list_damages_for_rental', rental_id=rental.id) }}" class="btn btn-sm btn-outline-danger">Damages</a>
+        <a href="{{ url_for('list_salik_for_rental', rental_id=rental.id) }}" class="btn btn-sm btn-outline-info">Salik</a>
+        <a href="{{ url_for('rental_due_summary', rental_id=rental.id) }}" class="btn btn-sm btn-outline-primary">Due Summary</a>
+        <a href="{{ url_for('edit_rental', rental_id=rental.id) }}" class="btn btn-sm btn-primary">Edit</a>
+        <form action="{{ url_for('delete_rental', rental_id=rental.id) }}" method="post" style="display:inline" onsubmit="return confirm('Delete this rental?');">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if rentals|length == 0 %}
+    <tr><td colspan="8"><em>No settled rentals.</em></td></tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

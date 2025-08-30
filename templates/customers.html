@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+<h1>Customers</h1>
+<a href="{{ url_for('add_customer') }}" class="btn btn-primary mb-3">Add Customer</a>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Passport</th>
+      <th>Licence</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for customer in customers %}
+    <tr>
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.phone }}</td>
+      <td>{{ customer.address }}</td>
+      <td>
+        {% if customer.passport_file %}
+          <span class="text-success">✔</span>
+        {% else %}
+          <span class="text-danger">✘</span>
+        {% endif %}
+      </td>
+      <td>
+        {% if customer.license_file %}
+          <span class="text-success">✔</span>
+        {% else %}
+          <span class="text-danger">✘</span>
+        {% endif %}
+      </td>
+      <td>
+        <a href="{{ url_for('edit_customer', customer_id=customer.id) }}" class="btn btn-sm btn-primary">Edit</a>
+        <form action="{{ url_for('delete_customer', customer_id=customer.id) }}" method="post" style="display:inline" onsubmit="return confirm('Delete this customer?');">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

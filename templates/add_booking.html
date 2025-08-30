@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Add Booking{% endblock %}
+{% block content %}
+<h1>Add Booking</h1>
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Car</label>
+    <select class="form-select" name="car_id" required>
+      {% for c in cars %}
+      <option value="{{ c.id }}">{{ c.licence_plate }} – {{ c.model }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Customer (optional)</label>
+    <select class="form-select" name="customer_id">
+      <option value="">–</option>
+      {% for cust in customers %}
+      <option value="{{ cust.id }}">{{ cust.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Start Date (DD/MM/YYYY)</label>
+    <input type="text" class="form-control datepicker" name="start_date" placeholder="dd/mm/yyyy" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">End Date (DD/MM/YYYY)</label>
+    <input type="text" class="form-control datepicker" name="end_date" placeholder="dd/mm/yyyy" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Note</label>
+    <input type="text" class="form-control" name="note">
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a href="{{ url_for('list_bookings') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

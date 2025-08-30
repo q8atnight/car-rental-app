@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Settle Rental{% endblock %}
+{% block content %}
+<h1>Settle Rental</h1>
+<p>Rental for <strong>{{ rental.car.licence_plate }} – {{ rental.car.model }}</strong> by <strong>{{ rental.customer.name }}</strong></p>
+
+<h3>Deposit Information</h3>
+<p>Deposit Amount: <strong>{{ rental.deposit or 0 }}</strong></p>
+
+<h3>Outstanding Charges</h3>
+{% if outstanding_fines or outstanding_damages or outstanding_salik %}
+  <table class="table table-dark table-striped">
+    <thead><tr><th>Type</th><th>Description/Period</th><th>Date(s)</th><th>Amount (AED)</th></tr></thead>
+    <tbody>
+    {% for f in outstanding_fines %}
+      <tr><td>Fine</td><td>{{ f.description }}</td><td>{{ f.date.strftime('%d/%m/%Y') }}</td><td>{{ f.amount }}</td></tr>
+    {% endfor %}
+    {% for d in outstanding_damages %}
+      <tr><td>Damage</td><td>{{ d.description }}</td><td>{{ d.date.strftime('%d/%m/%Y') }}</td><td>{{ d.amount }}</td></tr>
+    {% endfor %}
+    {% for s in outstanding_salik %}
+      <tr><td>Salik</td><td>Toll charges</td><td>{{ s.start_date.strftime('%d/%m/%Y') }}–{{ s.end_date.strftime('%d/%m/%Y') }}</td><td>{{ s.amount }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p class="text-end"><strong>Total Charges:</strong> {{ total_charges }}</p>
+{% else %}
+  <p>No outstanding fines, damages or Salik.</p>
+{% endif %}
+
+<h3>Deposit Refund</h3>
+<p>Refundable Amount: <strong>{{ refundable }}</strong></p>
+
+<form method="post">
+  <button type="submit" class="btn btn-success">Confirm Settlement</button>
+  <a href="{{ url_for('list_rentals') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
