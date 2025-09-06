@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: car-rental-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app_updated:app
