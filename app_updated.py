@@ -1,6 +1,6 @@
 import zipfile, os, sys
 
-ZIP_FILE = 'Rentals_V5_updated.zip'
+ZIP_FILE = 'Rentals_V5_code_v7.zip'
 EXTRACT_DIR = 'deployed_app'
 
 # Extract the zip if not already done
