@@ -9,7 +9,7 @@ if not os.path.isdir(EXTRACT_DIR):
         zip_ref.extractall(EXTRACT_DIR)
 
 # Add extracted project path to sys.path
-sys.path.insert(0, os.path.join(EXTRACT_DIR, 'Rentals_V5'))
+sys.path.insert(0, os.path.join(EXTRACT_DIR, 'Rentals_V5
 
 # Import the Flask app from the extracted code
 from app import app
